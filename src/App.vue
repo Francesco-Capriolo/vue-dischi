@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <Header />
-    <Main />
+    <Header @search="newSearch" />
+    <Main :searchString="searchAlbum" />
   </div>
 </template>
 
@@ -14,6 +14,16 @@ export default {
   components: {
     Header,
     Main,
+  },
+  data: function () {
+    return {
+      searchAlbum: "",
+    };
+  },
+  methods: {
+    newSearch(search) {
+      this.searchAlbum = search;
+    },
   },
 };
 </script>
