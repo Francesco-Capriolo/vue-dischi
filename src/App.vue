@@ -1,14 +1,16 @@
 <template>
   <div id="app">
-    <Header @search="newSearch" />
-    <Main :searchString="searchAlbum" />
+    <Header :genresList="genresList" @changedGenre="upSelectedGenres" />
+    <Main @loadGenres="upGenresList" :selectedGenre="selectedGenre" />
   </div>
 </template>
-
+//£ @changeGenre è l'emit che arriva dall'header all'app e si da una funzione 
+// ! :genresList è il props che si invia da app a header
+//£ @loadGenres è l'emit che arriva dall'header all'app e si da una funzione
+//! :selectedGenre è il props che si invia da app a main
 <script>
 import Header from "./components/Header.vue";
 import Main from "./components/Main.vue";
-
 export default {
   name: "App",
   components: {
@@ -17,12 +19,17 @@ export default {
   },
   data: function () {
     return {
-      searchAlbum: "",
+      genresList: [],
+      selectedGenre: "",
     };
   },
   methods: {
-    newSearch(search) {
-      this.searchAlbum = search;
+    // £ la funzione per assegnare ad un data la lista che serve
+    upGenresList(genresList) {
+      this.genresList = genresList;
+    },
+    upSelectedGenres(selectedGenre) {
+      this.selectedGenre = selectedGenre;
     },
   },
 };
@@ -37,8 +44,5 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-}
-body {
-  background-color: #1e2d3b;
 }
 </style>

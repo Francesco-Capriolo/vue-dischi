@@ -1,14 +1,18 @@
 <template>
   <div class="col">
     <div class="card h-100 p-2">
-      <img :src="albumObject.poster" class="card-img-top p-2" alt="Album" />
+      <img
+        :src="albumList.poster"
+        class="card-img-top p-2"
+        :alt="albumList.title"
+      />
       <div class="card-body">
-        <h5 class="card-title text-white">{{ albumObject.title }}</h5>
+        <h5 class="card-title text-white">{{ albumList.title }}</h5>
         <p class="card-text text-secondary">
-          {{ albumObject.author }}
+          {{ albumList.author }}
         </p>
         <p class="card-text text-secondary">
-          {{ albumObject.year }}
+          {{ albumList.year }}
         </p>
       </div>
     </div>
@@ -17,13 +21,17 @@
 
 <script>
 export default {
-  name: "IndexAlbum",
-  props: { albumObject: Object },
+  name: "DiscCard",
+  // ! il props che viene ricevuto dal main
+  props: ["albumList"],
 };
 </script>
 
 <style lang="scss" scoped>
 .card {
   background-color: #2e3a46;
+  img {
+    height: 160px;
+  }
 }
 </style>

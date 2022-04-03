@@ -5,14 +5,22 @@
         <img class="" src="../assets/logo.png" alt="Spoty-logo" />
       </div>
     </nav>
-    <div class="input-group mb-3 me-2">
-      <span class="input-group-text" id="basic-addon3">Choose the Genre</span>
-      <input
-        type="text"
-        class="form-control"
-        v-model="inputGenre"
-        @keyup="$emit('search', inputGenre)"
-      />
+    <div class="me-3">
+      <!-- @change per cambiare ogni volta l'emit che si vuole inviare all'app -->
+      <select
+        class="form-select form-select-sm"
+        v-model="selectedGenre"
+        @change="$emit('changedGenre', selectedGenre)"
+      >
+        <option value="">All</option>
+        <option
+          v-for="(genre, index) in genresList"
+          :key="index"
+          :value="genre"
+        >
+          {{ genre }}
+        </option>
+      </select>
     </div>
   </header>
 </template>
@@ -20,9 +28,12 @@
 <script>
 export default {
   name: "IndexHeader",
+  props: {
+    genresList: Array,
+  },
   data: function () {
     return {
-      inputGenre: "",
+      selectedGenre: "",
     };
   },
 };
@@ -35,8 +46,5 @@ header {
 }
 img {
   width: 50px;
-}
-div.input-group {
-  width: 20%;
 }
 </style>
